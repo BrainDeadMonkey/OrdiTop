@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search
+{% endblock %}
+
+{% block body %}
+	<h2>Résultats de recherche:</h2>
+	<table class="table table-striped text">
+		<tbody>
+			{% for article in result %}
+				<tr>
+					<td>
+						<a class="text-dark" href="{{ path('article_show', {'idArticle': article.idArticle}) }}">{{article.idFabricant.nomFabricant}}</a>
+					</td>
+					<td>
+						<a class="text-dark" href="{{ path('article_show', {'idArticle': article.idArticle}) }}">{{ article.modelArticle }}</a>
+					</td>
+					<td>
+						<a class="text-dark" href="{{ path('article_show', {'idArticle': article.idArticle}) }}">{{ article.descriptionArticle }}</a>
+					</td>
+					<td>
+						<a class="text-dark" href="{{ path('article_show', {'idArticle': article.idArticle}) }}">{{ article.prixArticle }}</a>
+					</td>
+					<td>
+						<a href="{{ path('article_show', {'idArticle': article.idArticle}) }}" class="btn btn-raised btn-secondary btn-sm ml-1 mr-1" style="width: 101px">Details</a>
+					</td>
+					<td>
+						<a title="Add to cart" href="{{ path('panier_add', {'idArticle': article.idArticle}) }}">
+							<i class="fas fa-cart-arrow-down fa-2x"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!
+{% endblock %}
+
+{% block body %}
+	<hr>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Fabricant</th>
+				<th scope="col">Model</th>
+				<th scope="col">Prix</th>
+				<th scope="col">Quantité</th>
+				<th scope="col">Supprimer</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for article in article_panier %}
+				<tr>
+
+					<th scope="row">{{ loop.index }}</th>
+					<td>
+						<a class="text-dark" href="{{ path('article_show', {'idArticle': article.idArticle}) }}">{{article.idFabricant.nomFabricant}}</a>
+					</td>
+					<td>
+						<a class="text-dark" href="{{ path('article_show', {'idArticle': article.idArticle}) }}">{{ article.modelArticle }}</a>
+					</td>
+					<td>
+						<a class="text-dark" href="{{ path('article_show', {'idArticle': article.idArticle}) }}">{{ article.prixArticle }}</a>
+					</td>
+					<td>
+						<a href="{{ path("panier_moins", { idArticle: article.idArticle}) }}">
+							<i class="fas fa-minus"></i>
+						</a>
+						<span class="font-weight-bold mx-2">{{ panier[article.idArticle] }}</span>
+						<a href="{{ path("panier_plus", { idArticle: article.idArticle }) }}">
+							<i class="fas fa-plus"></i>
+						</a>
+					</td>
+					<td>
+						<a href="{{ path("panier_remove", { idArticle: article.idArticle }) }}">
+							<i class="far fa-trash-alt"></i>
+						</a>
+					</td>
+				</tr>
+				<a class='btn btn-raised btn-info btn-sm mr-1 align-text-middle' style="width: 101px" href="{{ path('commande_new') }}">Valider</a>
+			{% endfor %}
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<span class="font-weight-bold">Total:</span>
+				</td>
+				<td>
+					<span class="font-weight-bold mr-1">{{ total }}</span>
+					<i class="fas fa-euro-sign"></i>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SousRubrique index{% endblock %}
+
+{% block body %}
+    <h1>SousRubrique index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdSousRubrique</th>
+                <th>NomSousRubrique</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sous_rubrique in sous_rubriques %}
+            <tr>
+                <td>{{ sous_rubrique.idSousRubrique }}</td>
+                <td>{{ sous_rubrique.nomSousRubrique }}</td>
+                <td>
+                    <a href="{{ path('sous_rubrique_show', {'idSousRubrique': sous_rubrique.idSousRubrique}) }}">show</a>
+                    <a href="{{ path('sous_rubrique_edit', {'idSousRubrique': sous_rubrique.idSousRubrique}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sous_rubrique_new') }}">Create new</a>
+{% endblock %}

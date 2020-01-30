@@ -1,0 +1,25 @@
+{{ form_start(form) }}
+{# <div class="form-group">
+	<label for="article_prixArticle" class="bmd-label-floating text-dark">Prix</label>
+	{{ form_widget(form.modeLivraison) }}
+</div> #}
+{# <div class="form-group">
+	<label for="article_stockArticle" class="bmd-label-floating text-dark">Stock</label>
+	{{ form_widget(form.modePaiement) }}
+</div> #}
+{# <div class="form-group">
+	<label for="article_idFabricant" class="bmd-label-floating text-dark">Adresse facture</label>
+	{{ form_row(form.idAdresseFacture, {'attr': {'value': form.idAdresseFacture}}) }}
+</div> #}
+{# <div class="form-group">
+	<label for="article_idSousRubrique" class="bmd-label-floating text-dark">Adresse livraison</label>
+	{{ form_widget(form.idAdresseLivraison) }}
+</div>
+<div class="form-group">
+	<label for="article_idSousRubrique" class="bmd-label-floating text-dark">Client</label>
+	{{ form_row(form.idClient, {'attr': {'value': app.user.id }}) }}
+</div> #}
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

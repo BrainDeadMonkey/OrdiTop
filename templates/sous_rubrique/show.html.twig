@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SousRubrique
+{% endblock %}
+
+{% block body %}
+	<h1>SousRubrique</h1>
+	<div class="card-deck ">
+		<div class="row">
+			{% for article in articles %}
+				{% if sous_rubrique.idSousRubrique == article.idSousRubrique.idSousRubrique  %}
+					<div class="col-sm-6 col-md-4 col-lg-3 my-4">
+						<a href="{{ path('article_show', {'idArticle': article.idArticle}) }}">
+							<div class="card " style="height:350px">
+								<div class="card-header">
+									<img src="{{asset('uploads/images/' ~ article.mainImage)}}" class="card-img-top img-fluid" alt="...">
+								</div>
+								<div class="card-body text-center text-capitalize">
+									<h5 class="card-title">{{article.idFabricant.nomFabricant}}</h5>
+									<p class="card-text">
+										<h6>Model:
+											{{article.modelArticle}}</h6>
+										<b>Prix :</b>
+										{{article.prixArticle}}<br></p>
+								</div>
+							</div>
+						</a>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+
+	<a href="{{ path('sous_rubrique_index') }}">back to list</a>
+
+    <a href="{{ path('sous_rubrique_edit', {'idSousRubrique': sous_rubrique.idSousRubrique}) }}">edit</a>
+
+	{{ include('sous_rubrique/_delete_form.html.twig') }}
+{% endblock %}

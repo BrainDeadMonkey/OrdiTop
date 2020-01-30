@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article
+{% endblock %}
+
+{% block body %}
+	<div class='row'>
+		<div class="col-3 zoom">
+			<img src="{{asset('uploads/images/' ~ article.mainImage)}}" class="card-img-top img-fluid" alt="...">
+		</div>
+		<div class="col-6 align-self-center">
+			<h4>
+				<p class="align-middle">Fabricant :
+					{{article.idFabricant.nomFabricant}}</p>
+			</h4>
+			<h4>
+				<p class="align-middle">Model :
+					{{ article.modelArticle }}</p>
+			</h4>
+			<h4>
+				<p class="align-middle">Description :
+					{{ article.descriptionArticle }}</p>
+			</h4>
+		</div>
+		<div class="col-3 align-self-center">
+			<h4>
+				<p class="align-middle">Prix :
+					{{ article.prixArticle }} <i class="fas fa-euro-sign"></i></p>
+			</h4>
+			<a class='btn btn-raised btn-info btn-sm mr-1 align-text-middle' style="width: 101px" href="{{ path('panier_add', {'idArticle': article.idArticle}) }}">Add to cart</a>
+		</div>
+	</div>
+	<div class="btn-group" role="group" aria-label="Basic example">
+    {% if is_granted('ROLE_ADMIN') %}
+		<a class='btn btn-raised btn-primary btn-sm mr-1 align-text-middle' style="width: 101px" href="{{ path('article_edit', {'idArticle': article.idArticle}) }}">Edit</a>
+    {% endif %}
+		<a class='btn btn-raised btn-secondary btn-sm ml-1 mr-1' href="{{ path('article_index') }}">back to list</a>
+	</div>
+
+{% endblock %}

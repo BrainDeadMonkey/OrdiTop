@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rubrique{% endblock %}
+
+{% block body %}
+  <h1>{{ rubrique.nomRubrique }}</h1>
+
+  <div class="card-deck ">
+		<div class="row">
+{% for sousRubrique in sousrubriques %}
+    {% if sousRubrique.rubrique.idRubrique == sousRubrique.idSousRubrique  %}
+       {% for article in articles %}
+           {% if sousRubrique.idSousRubrique == article.idSousRubrique.idSousRubrique  %}
+                <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+						<a href="{{ path('article_show', {'idArticle': article.idArticle}) }}">
+							<div class="card " style="height:350px">
+								<div class="card-header">
+									<img src="{{asset('uploads/images/' ~ article.mainImage)}}" class="card-img-top img-fluid" alt="...">
+								</div>
+								<div class="card-body text-center text-capitalize">
+									<h5 class="card-title">{{article.idFabricant.nomFabricant}}</h5>
+									<p class="card-text">
+										<h6>Model:
+											{{article.modelArticle}}</h6>
+										<b>Prix :</b>
+										{{article.prixArticle}}<br></p>
+								</div>
+							</div>
+						</a>
+					</div>
+           {% endif %}
+       {% endfor %}
+    {% endif %}
+{% endfor %}
+</div>
+</div>
+
+<pre>
+    {{ dump(rubrique) }}
+</pre>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdRubrique</th>
+                <td>{{ rubrique.idRubrique }}</td>
+            </tr>
+            <tr>
+                <th>NomRubrique</th>
+                <td>{{ rubrique.nomRubrique }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rubrique_index') }}">back to list</a>
+
+    <a href="{{ path('rubrique_edit', {'idRubrique': rubrique.idRubrique}) }}">edit</a>
+
+    {{ include('rubrique/_delete_form.html.twig') }}
+{% endblock %}
