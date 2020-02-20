@@ -31,7 +31,7 @@ class PanierController extends AbstractController
         }
         $session->set("total", [$total]);
         $session->set('all_cart', [$all_cart]);
-        var_dump($session->get("total", [$total]));
+        
         
         return $this->render('panier/panier.html.twig', [
             "article_panier" => $article_panier,

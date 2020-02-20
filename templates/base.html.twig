@@ -2,13 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
-			<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
 		{% endblock %}
 	</head>
 	<body>
@@ -25,42 +25,57 @@
 		{# Navbar #}
 			<div class="container"> <div class="row">
 				<div class="col-12 my-auto">
-					<nav class="navbar navbar-expand-lg justify-content-center navbar-light bg-light mt-4 mb-3">
-						<a class="navbar-brand clr" href="{{ path('article_index') }}">Record</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon">
-								<i class="fa fa-bars clr2" aria-hidden="true"></i>
-							</span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav mr-auto mx-auto text-center">
-								<form class="form-inline my-2 my-lg-0" action="{{ path('search_result') }}">
-									<input class="form-control mr-sm-2" type="search" name="a" placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					<nav class="navbar navbar-expand-lg navbar-light bg-light flex-nowrap">
+						<a class="navbar-brand clr" href="{{ path('article_index') }}">
+							<img src="/build/images/output-ondqsdlinejpgtools.png" class="img-fluid my-0 mx-0" width="50" height="50" alt="OrdiTop">
+						</a>
+							<ul class="navbar-nav mr-auto mx-auto ">
+								<form id="searchform" action="{{ path('search_result') }}">
+								<div class="input-group my-2">
+									<input class="form-control form-control-sm" type="text" name="a" placeholder="Search" aria-label="Search">
+									<a class ="mt-auto ml-3" href="javascript:{}" onclick="document.getElementById('searchform').submit();">
+										<span style="color: Dodgerblue;">
+											<i class="fas fa-search fa-lg"></i>
+										</a>
+									</span>
+									</div>
 								</form>
 							</ul>
 							<ul class="nav navbar-nav flex-row justify-content-center flex-nowrap mr-2">
-							{% if not app.request.hasPreviousSession %}
-								<a class="btn btn-raised btn-danger btn-sm mr-1" style="width: 101px" href="{{ path('app_login') }}" role="button" title="Log In" target="blank">Log in <i class="fas fa-sign-in-alt"></i></a>
-							{% endif %}
-							{% if app.request.hasPreviousSession %}
-								<a class="btn btn-raised btn-danger btn-sm ml-1 mr-1" style="width: 101px" href="{{ path('app_logout') }}" role="button">Log out <i class="fas fa-sign-out-alt"></i></a>
-							{% endif %}
-							{% if is_granted('ROLE_ADMIN') %}
-								<a class="btn btn-raised btn-info btn-sm ml-1" href="{{ path('article_new') }}" role="button">Create new</a>
-							{% endif %}
+								{% if not app.request.hasPreviousSession %}
+									<a class="btn btn-raised btn-danger btn-sm ml-1 mr-1 d-none d-sm-block" style="width: 101px" href="{{ path('app_login') }}" role="button" title="Log In" target="blank">Log in
+										<i class="fas fa-sign-in-alt"></i>
+									</a>
+									<a class="btn btn-raised btn-danger ml-1 mr-1 d-block d-sm-none" href="{{ path('app_login') }}" role="button">
+										<i class="fas fa-sign-in-alt"></i>
+									</a>
+								{% endif %}
+								{% if app.request.hasPreviousSession %}
+									<a class="btn btn-raised btn-danger btn-sm ml-1 mr-1 d-none d-md-block" style="width: 101px" href="{{ path('app_logout') }}" role="button">Log out
+										<i class="fas fa-sign-out-alt"></i>
+									</a>
+									<a class="btn btn-raised btn-danger ml-1 mr-1 d-block d-md-none" href="{{ path('app_logout') }}" role="button">
+										<i class="fas fa-sign-out-alt"></i>
+									</a>
+								{% endif %}
+								{% if is_granted('ROLE_ADMIN') %}
+									<a class="btn btn-raised btn-info btn-sm ml-1 d-none d-md-block" href="{{ path('article_new') }}" role="button">Create new</a>
+									<a class="btn btn-raised btn-info ml-1 mr-1 d-block d-md-none" href="{{ path('article_new') }}" role="button">
+										<i class="far fa-plus-square"></i>
+									</a>
+								{% endif %}
 							</ul>
 							<ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
 								<li class="nav-item">
 									<a href="{{ path('panier_liste') }}">
-										<i class="fas fa-shopping-cart fa-2x"></i>
+										<i class="fas fa-shopping-cart fa-2x">{{ all_cart }}</i>
 									</a>
-									{{ all_cart }}
+									
 								</li>
 								<li class="nav-item"></li>
 								<li class="nav-item"></li>
 							</ul>
-						</div>
+						
 					</nav>
 				</div>
 			</div>
@@ -68,7 +83,7 @@
 			{# Header carousel #}
 			<div class="row">
 				<div class="col-12 my-auto">
-					<div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
+					<div id="carouselExampleIndicators" class="carousel slide mb-3 mt-4" data-ride="carousel">
 						<ol class="carousel-indicators ">
 							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -202,14 +217,6 @@
 			</footer>
 
 			{% block javascripts %}
-				<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-				<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-				<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-				<script>
-					$(document).ready(function () {
-$('body').bootstrapMaterialDesign();
-});
-				</script>
 				{{ encore_entry_script_tags('app') }}
 			{% endblock %}
 		</body>

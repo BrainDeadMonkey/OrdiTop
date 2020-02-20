@@ -7,6 +7,7 @@ body {
   /* background-image: url('https://4.bp.blogspot.com/-t66dsqEtoEg/UvTSMA8OMCI/AAAAAAAAASA/4OUBnSoo2HI/s1920/fondoPMG.jpg'); */
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-color: rgb(229, 229, 230) !important;
 }
 
 .card-image {

@@ -3,7 +3,7 @@
 {% block title %}Edit Article{% endblock %}
 
 {% block body %}
-<img src="{{asset('uploads/images/' ~ article.mainImage)}}" class="card-img-top img-fluid" alt="...">
+<img src="{{asset('uploads/articles/' ~ article.mainImage)}}" class="card-img-top img-fluid" alt="...">
     <h1>Edit Article</h1>
     {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
     <a href="{{ path('article_show', {'idArticle': article.idArticle}) }}" class="btn btn-raised btn-secondary btn-sm ml-1 mr-1" style="width: 101px">Back</a>

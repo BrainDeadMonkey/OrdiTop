@@ -3,14 +3,14 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-	<div class="card-deck ">
+	<div class="card-deck">
 		<div class="row">
 			{% for article in articles %}
 				<div class="col-sm-6 col-md-4 col-lg-3 my-4">
 					<a href="{{ path('article_show', {'idArticle': article.idArticle}) }}">
 						<div class="card " style="height:350px">
 							<div class="card-header">
-								<img src="{{asset('uploads/images/' ~ article.mainImage)}}" class="card-img-top img-fluid" style="height: 100px;" alt="...">
+								<img src="{{asset('uploads/articles/' ~ article.mainImage)}}" class="card-img-top img-fluid" style="height: 100px;" alt="...">
 							</div>
 							<div class="card-body text-center text-capitalize">
 								<h5 class="card-title">{{article.idFabricant.nomFabricant}}</h5>
